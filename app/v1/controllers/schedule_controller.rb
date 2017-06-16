@@ -16,7 +16,7 @@ module Api
             halt 422 # unprocessable entity
           end
 
-          time = (body['time'] || ENV['DEFAULT_INFECTION_TIME']).to_i
+          time = (body['interval'] || ENV['DEFAULT_INFECTION_TIME']).to_i
           InfectionScheduleWorker.perform_in(time.seconds, key, time)
           [201, { 'game_key' => key }.to_json]
         end
@@ -24,9 +24,17 @@ module Api
         delete '/schedule/:game_key' do
           game_key = params['game_key']
           success = SidekiqRemover.delete_all(game_key)
-          code = 404
-          code = 200 if success
-          [code, { 'game_key' => game_key }.to_json]
+          response = nil
+          code = nil
+
+          if success
+            code = 200
+            response = { success: true }.to_json
+          else
+            code = 404
+            response = { success: false }.to_json
+          end
+          [code, response]
         end
       end
     end
