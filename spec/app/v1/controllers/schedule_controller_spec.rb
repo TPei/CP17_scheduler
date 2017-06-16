@@ -31,7 +31,7 @@ RSpec.describe Api::V1::Controllers::ScheduleController do
           expect(InfectionScheduleWorker).to receive(:perform_in).
             with(@time.seconds, @game_key, @time)
 
-          data = { 'game_key' => @game_key, 'time' => @time }.to_json
+          data = { 'game_key' => @game_key, 'interval' => @time }.to_json
           post '/schedule', data, @header
 
           expect(last_response.status).to eq 201

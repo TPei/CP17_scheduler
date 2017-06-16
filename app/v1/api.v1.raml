@@ -40,12 +40,35 @@ traits:
   is: [ default ]
   get:
     description: get hello world
+    responses:
+      200:
+        body:
+          schema: successGetSchema
+          example: !include examples/successGetResponse.json
 
 /schedule:
   is: [ resilient, failable ]
   post:
     is: [ creating ]
     description: schedules a job
-  delete:
-    is: [ default ]
-    description: deletes a job
+    body:
+      schema: schedulePost
+      example: !include examples/schedulePost.json
+    responses:
+      201:
+        body:
+          schema: schedulePostResponse
+          example: !include examples/schedulePostResponse.json
+  /{game_key}:
+    delete:
+      is: [ default ]
+      description: deletes a job
+      responses:
+        200:
+          body:
+            schema: scheduleDeleteSuccessResponse
+            example: !include examples/scheduleDeleteSuccessResponse.json
+        404:
+          body:
+            schema: scheduleDeleteFailResponse
+            example: !include examples/scheduleDeleteFailResponse.json
