@@ -1,13 +1,9 @@
 {
   "AWSEBDockerrunVersion": 2,
-  "authentication": {
-    "bucket": "BUCKET-NAME",
-    "key": "config.json"
-  },
   "containerDefinitions": [
   {
     "name": "web",
-    "image": "pandemic-web",
+    "image": "tpei/cp17scheduler_web",
     "essential": true,
     "memory": 1024,
     "portMappings": [
@@ -19,7 +15,7 @@
   },
   {
     "name": "sidekiq",
-    "image": "pandemic-sidekiq",
+    "image": "tpei/cp17scheduler_sidekiq",
     "essential": true,
     "memory": 1024
   }
