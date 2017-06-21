@@ -1,23 +1,23 @@
 {
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
-  {
-    "name": "web",
-    "image": "tpei/cp17scheduler_web",
-    "essential": true,
-    "memory": 1024,
-    "portMappings": [
     {
-      "hostPort": 80,
-      "containerPort": 4567
+      "name": "web",
+      "image": "tpei/cp17scheduler_web",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 4567
+        }
+      ]
+    },
+    {
+      "name": "sidekiq",
+      "image": "tpei/cp17scheduler_sidekiq",
+      "essential": true,
+      "memory": 256
     }
-    ]
-  },
-  {
-    "name": "sidekiq",
-    "image": "tpei/cp17scheduler_sidekiq",
-    "essential": true,
-    "memory": 1024
-  }
   ]
 }
