@@ -5,7 +5,7 @@
       "name": "web",
       "image": "tpei/cp17scheduler_web",
       "essential": true,
-      "memory": 128,
+      "memory": 384,
       "portMappings": [
         {
           "hostPort": 80,
@@ -17,7 +17,7 @@
       "name": "sidekiq",
       "image": "tpei/cp17scheduler_sidekiq",
       "essential": true,
-      "memory": 128
+      "memory": 384
     }
   ]
 }
