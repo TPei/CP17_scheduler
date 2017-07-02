@@ -14,4 +14,8 @@ Go to: http://localhost:4567/v1/documentation
 - `docker-compose up -d`
 - `docker exec -it cp17scheduler_web_1 /bin/bash` to connect to a shell
 - `bundle exec rspec` to run tests
-- `bundle exec rubocop` to run linter
+
+## Deploying
+- build containers with `docker build -t tpei/cp17scheduler_web .` and `docker build -t tpei/cp17scheduler_sidekiq -f Dockerfile_sidekiq .`
+- push updated images to dockerhub via `docker push tpei/cp17scheduler_web` and `docker push tpei/cp17scheduler_sidekiq` (requires permissions)
+- upload Dockerrun.aws.json to aws with newer version tag
