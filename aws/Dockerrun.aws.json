@@ -2,7 +2,7 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "cp17-scheduler",
+      "name": "web",
       "image": "543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest",
       "essential": true,
       "memory": 384,
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "name": "cp17-scheduler-sidekiq",
+      "name": "sidekiq",
       "image": "543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler-sidekiq:latest",
       "essential": true,
       "memory": 384
