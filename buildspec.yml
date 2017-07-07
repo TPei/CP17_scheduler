@@ -7,7 +7,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
+      - echo Building the Docker images...
       - docker build -t cp17-scheduler .
       - docker tag cp17-scheduler:latest 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest
       - docker build -t cp17-scheduler-sidekiq -f Dockerfile_sidekiq .
@@ -15,10 +15,10 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image...
+      - echo Pushing the Docker images...
       - docker push 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest
       - docker push 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler-sidekiq:latest
-      - echo '{"timestamp":"'$(date +%s)'"}' > timestamp.json
+      - mv aws/Dockerrun.aws.json .
 artifacts:
   files:
-    - 'timestamp.json'
+    - 'Dockerrun.aws.json'
