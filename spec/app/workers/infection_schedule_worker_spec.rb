@@ -22,7 +22,7 @@ RSpec.describe InfectionScheduleWorker do
       expect(Unirest).to receive(:post).
         with(
           "#{ENV['MAIN_SERVICE_URL']}/game/infection",
-          parameters: { game_key: key }
+          parameters: { game_id: key }
         )
 
       expect(InfectionScheduleWorker).to receive(:perform_in).

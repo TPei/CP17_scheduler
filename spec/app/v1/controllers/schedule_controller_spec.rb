@@ -31,11 +31,11 @@ RSpec.describe Api::V1::Controllers::ScheduleController do
           expect(InfectionScheduleWorker).to receive(:perform_in).
             with(@time.seconds, @game_key, @time)
 
-          data = { 'game_key' => @game_key, 'interval' => @time }.to_json
+          data = { 'game_id' => @game_key, 'interval' => @time }.to_json
           post '/schedule', data, @header
 
           expect(last_response.status).to eq 201
-          expect(last_response.body).to eq({ 'game_key' => @game_key }.to_json)
+          expect(last_response.body).to eq({ 'game_id' => @game_key }.to_json)
         end
       end
 
@@ -46,11 +46,11 @@ RSpec.describe Api::V1::Controllers::ScheduleController do
           expect(InfectionScheduleWorker).to receive(:perform_in).
             with(time.seconds, @game_key, time)
 
-          data = { 'game_key' => @game_key }.to_json
+          data = { 'game_id' => @game_key }.to_json
           post '/schedule', data, @header
 
           expect(last_response.status).to eq 201
-          expect(last_response.body).to eq({ 'game_key' => @game_key }.to_json)
+          expect(last_response.body).to eq({ 'game_id' => @game_key }.to_json)
         end
       end
     end
