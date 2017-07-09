@@ -6,12 +6,12 @@ require 'active_support/time'
 class InfectionScheduleWorker
   include Sidekiq::Worker
 
-  def perform(game_key, time)
+  def perform(game_id, time)
     Unirest.post(
       "#{ENV['MAIN_SERVICE_URL']}/game/infection",
-      parameters: { game_key: game_key }
+      parameters: { game_id: game_id }
     )
 
-    InfectionScheduleWorker.perform_in(time.seconds, game_key, time)
+    InfectionScheduleWorker.perform_in(time.seconds, game_id, time)
   end
 end
