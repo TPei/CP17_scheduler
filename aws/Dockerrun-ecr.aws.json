@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "web",
-      "image": "tosto/cp17scheduler_web",
+      "image": "543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest",
       "essential": true,
       "memory": 384,
       "portMappings": [
@@ -15,7 +15,7 @@
     },
     {
       "name": "sidekiq",
-      "image": "tosto/cp17scheduler_sidekiq",
+      "image": "543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler-sidekiq:latest",
       "essential": true,
       "memory": 384
     }
