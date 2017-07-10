@@ -1,0 +1,24 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region eu-west-1)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker images...
+      - docker build -t cp17-scheduler .
+      - docker tag cp17-scheduler:latest 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest
+      - docker build -t cp17-scheduler-sidekiq -f Dockerfile_sidekiq .
+      - docker tag cp17-scheduler-sidekiq:latest 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler-sidekiq:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler:latest
+      - docker push 543123751610.dkr.ecr.eu-west-1.amazonaws.com/cp17-scheduler-sidekiq:latest
+      - mv aws/Dockerrun-ecr.aws.json ./Dockerrun.aws.json
+artifacts:
+  files:
+    - 'Dockerrun.aws.json'
