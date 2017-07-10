@@ -9,6 +9,7 @@ class InfectionScheduleWorker
   def perform(game_id, time)
     Unirest.post(
       "#{ENV['MAIN_SERVICE_URL']}/game/infection",
+      headers: { "content-type" => "application/json" },
       parameters: { game_id: game_id }
     )
 
