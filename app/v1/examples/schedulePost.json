@@ -1,4 +1,4 @@
 {
-  "game_key": "someykey",
-  "interval": 500,
+  "game_id": "some-game-id-such-wow",
+  "interval": 500
 }
